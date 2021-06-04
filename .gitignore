@@ -1,0 +1,7 @@
+.idea/
+/vendor/
+/test/fixture/recipe/tmp/
+/etc/app.yaml
+/etc/*.json
+*.phar
+phpunit.xml

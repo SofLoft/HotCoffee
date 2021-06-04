@@ -1,0 +1,30 @@
+{
+  "name": "hotcoffee/shop",
+  "description": "HotCoffee",
+  "license": "MIT",
+  "homepage": "https://hotcoffee.com",
+  "support": {
+    "source": "https://git.sysint.net/softloft/mpl"
+  },
+  "authors": [
+    {
+      "name": "Soft-Loft Team",
+      "email": "vls.sergey@soft-loft.eu"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Hotcoffee\\": "src/"
+    },
+    "files": []
+  },
+  "require": {
+    "php": "~7.3"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "7.3.26"
+    }
+  }
+}
