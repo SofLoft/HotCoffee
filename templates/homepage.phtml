@@ -1,0 +1,49 @@
+<?php
+/** @var Homepage $this */
+
+use Hotcoffee\App\Template\Homepage;
+
+$orderInformation = $this->getOrderInformation();
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HotCoffee</title>
+</head>
+<body>
+    <form id="frmHotCoffee" method="post" enctype="multipart/form-data" action="">
+        <label for="lstCountry">Please select country</label>
+        <select id="lstCountry" name="country">
+            <?php foreach ($this->getCountryList() as $countryId => $countryName): ?>
+                <option value="<?= $countryId ?>">
+                    <?= $countryName; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <br/>
+        <label>
+            Would you like a Syrup?
+            <input type="checkbox" name="syrup" value="1">
+        </label>
+        <br/>
+        <label>
+            Would you like a something else?
+            <input type="checkbox" name="addition" value="1">
+        </label>
+        <br/>
+        <button type="submit">
+            Make coffee
+        </button>
+    </form>
+
+    <?php if ($orderInformation !== ''): ?>
+    <br/>
+    <h3>Order information</h3>
+    <p>
+        <?= $orderInformation ?>
+    </p>
+    <?php endif; ?>
+</body>
+</html>

@@ -10,6 +10,12 @@ namespace Hotcoffee\Country;
 interface CountryInterface
 {
     /**
+     * Make coffee
+     * @return CountryInterface
+     */
+    public function makeCoffee() : CountryInterface;
+
+    /**
      * Returns a portion
      * @return int
      */
@@ -22,14 +28,14 @@ interface CountryInterface
     public function getSyrup() : string;
 
     /**
-     * Return add-on by default
-     * @return string
+     * Return add-ons
+     * @return \Hotcoffee\Addon\AddonInterface[]
      */
-    public function getAddOn() : string;
+    public function getAddOns() : array;
 
     /**
      * Return Ingredients
-     * @return \Hotcofee\IngredientInterface[]
+     * @return \Hotcoffee\IngredientInterface[]
      */
     public function getIngredients() : array;
 }

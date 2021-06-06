@@ -3,19 +3,15 @@
 
 namespace Hotcoffee\Country;
 
-
 use Hotcoffee\Ingredients\CoconutSyrupIngredient;
-use Hotcoffee\Ingredients\FabricIngredient;
+use Hotcoffee\Addon\CroissantAddon;
 
 /**
  * Class Italy
  * @package Hotcoffee\Country
  */
-class Italy implements CountryInterface
+class Italy extends Base
 {
-    /** @var FabricIngredient */
-    private $fabricIngredient;
-
     /**
      * Returns a portion
      * @return int
@@ -23,6 +19,15 @@ class Italy implements CountryInterface
     public function getPortion(): int
     {
         return 1;
+    }
+
+    /**
+     * Make coffee
+     * @return CountryInterface
+     */
+    public function makeCoffee(): CountryInterface
+    {
+        // TODO: Implement makeCoffee() method.
     }
 
     /**
@@ -34,7 +39,7 @@ class Italy implements CountryInterface
         return $this->getFabricIngredient()->create(
             CoconutSyrupIngredient::class,
             'Coco',
-            1.25
+            0.50
         )->getName();
     }
 
@@ -44,7 +49,20 @@ class Italy implements CountryInterface
      */
     public function getAddOn(): string
     {
-        // TODO: Implement getAddOn() method.
+        return $this->getFabricAddon()->create(
+            CroissantAddon::class,
+            'Croissant',
+            1.00
+        )->getName();
+    }
+
+    /**
+     * Return add-ons
+     * @return \Hotcoffee\Addon\AddonInterface[]
+     */
+    public function getAddOns(): array
+    {
+        // TODO: Implement getAddOns() method.
     }
 
     /**
@@ -54,16 +72,5 @@ class Italy implements CountryInterface
     public function getIngredients(): array
     {
         // TODO: Implement getIngredients() method.
-    }
-
-    /**
-     * @return FabricIngredient
-     */
-    private function getFabricIngredient() : FabricIngredient
-    {
-        if ($this->fabricIngredient === null) {
-            $this->fabricIngredient = new FabricIngredient();
-        }
-        return $this->fabricIngredient;
     }
 }

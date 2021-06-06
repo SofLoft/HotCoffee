@@ -4,10 +4,9 @@
 namespace Hotcoffee\Ingredients;
 
 /**
- * Class Coffee
+ * Class MelonSyrup
  * @package Hotcofee
  */
-class CoffeeIngredient extends IngredientAbstract
+class MelonSyrupIngredient extends IngredientAbstract
 {
-
 }
