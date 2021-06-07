@@ -2,6 +2,9 @@
 
 This is a test task
 
+![Alt text](media/img.png "Screen")
+
+
 ## Install
 
 Just run the command
