@@ -1,7 +1,9 @@
 <?php
 
-
 namespace Hotcoffee\Country;
+
+use Hotcoffee\Addon\AddonInterface;
+use Hotcoffee\Ingredients\IngredientInterface;
 
 /**
  * Interface CountryInterface
@@ -10,32 +12,44 @@ namespace Hotcoffee\Country;
 interface CountryInterface
 {
     /**
-     * Make coffee
-     * @return CountryInterface
-     */
-    public function makeCoffee() : CountryInterface;
-
-    /**
-     * Returns a portion
-     * @return int
-     */
-    public function getPortion() : int;
-
-    /**
-     * Return Syrup by default
+     * Returns country name
      * @return string
      */
-    public function getSyrup() : string;
+    public function getCountryName() : string;
+
+    /**
+     * Prepare components
+     * @return CountryInterface
+     */
+    public function prepareComponents() : CountryInterface;
+
+    /**
+     * Taxes
+     * @return float
+     */
+    public function getTax() : float;
 
     /**
      * Return add-ons
-     * @return \Hotcoffee\Addon\AddonInterface[]
+     * @return AddonInterface[]
      */
     public function getAddOns() : array;
 
     /**
      * Return Ingredients
-     * @return \Hotcoffee\IngredientInterface[]
+     * @return IngredientInterface[]
      */
     public function getIngredients() : array;
+
+    /**
+     * Add syrup to coffee
+     * @return CountryInterface
+     */
+    public function addSyrup() : CountryInterface;
+
+    /**
+     * Add add-ons
+     * @return CountryInterface
+     */
+    public function addAddons() : CountryInterface;
 }

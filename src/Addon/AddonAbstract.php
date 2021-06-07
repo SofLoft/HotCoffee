@@ -15,15 +15,20 @@ abstract class AddonAbstract implements AddonInterface
     /** @var float */
     protected $price;
 
+    /** @var int */
+    protected $qty;
+
     /**
-     * IngredientAbstract constructor.
+     * AddonAbstract constructor.
      * @param string $name
      * @param float $price
+     * @param int $qty
      */
-    public function __construct(string $name, float $price)
+    public function __construct(string $name, float $price, int $qty)
     {
         $this->name = $name;
         $this->price = $price;
+        $this->qty = $qty;
     }
 
     /**
@@ -42,5 +47,14 @@ abstract class AddonAbstract implements AddonInterface
     public function getPrice(): float
     {
         return $this->price;
+    }
+
+    /**
+     * Qty
+     * @return int
+     */
+    public function getQty(): int
+    {
+        return $this->qty;
     }
 }

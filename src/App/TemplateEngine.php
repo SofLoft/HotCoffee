@@ -10,23 +10,23 @@ namespace Hotcoffee\App;
 class TemplateEngine
 {
     /** @var string */
-    private $name;
+    private $template;
 
     /**
      * Template constructor.
-     * @param string $name
+     * @param string $template
      */
-    public function __construct(string $name)
+    public function __construct(string $template)
     {
-        $this->name = $name;
+        $this->template = $template;
     }
 
     /**
      * Render
      * @return void
      */
-    public function render()
+    public function render() : void
     {
-        include "templates/{$this->name}.phtml";
+        include "templates/{$this->template}.phtml";
     }
 }

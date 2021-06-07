@@ -1,10 +1,6 @@
 <?php
 
-
 namespace Hotcoffee\Ingredients;
-
-use Hotcoffee\Ingredients\CoconutSyrupIngredient;
-use Hotcoffee\Ingredients\IngredientInterface;
 
 /**
  * Class FabricIngredient
@@ -17,13 +13,15 @@ class FabricIngredient
      * @param string $className
      * @param string $name
      * @param float $price
+     * @param int $qty
      * @return IngredientInterface
      */
     public function create(
         string $className,
         string $name,
-        float $price
+        float $price,
+        int $qty
     ) : IngredientInterface {
-       return new $className($name, $price);
+       return new $className($name, $price, $qty);
     }
 }

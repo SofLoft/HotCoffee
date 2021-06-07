@@ -3,8 +3,13 @@
 
 namespace Hotcoffee\App\Template;
 
-use Hotcoffee\OrderProcessing;
+use Hotcoffee\Country\CountryInterface;
+use Hotcoffee\Order;
+use Hotcoffee\Coffee;
+use Hotcoffee\CoffeeSettings;
+use Hotcoffee\CountryResolver;
 use Hotcoffee\App\TemplateEngine;
+use Hotcoffee\App\Request\OrderFormValuesExtractor;
 
 /**
  * Class Homepage
@@ -12,8 +17,14 @@ use Hotcoffee\App\TemplateEngine;
  */
 class Homepage extends TemplateEngine
 {
-    /** @var OrderProcessing */
-    private $orderProcessing;
+    /** @var OrderFormValuesExtractor */
+    private $orderFormValuesExtractor;
+
+    /** @var CountryResolver */
+    private $countryResolver;
+
+    /** @var array */
+    private $errors = [];
 
     /**
      * Homepage constructor.
@@ -22,7 +33,8 @@ class Homepage extends TemplateEngine
     {
         parent::__construct('homepage');
 
-        $this->orderProcessing = new OrderProcessing();
+        $this->orderFormValuesExtractor = new OrderFormValuesExtractor();
+        $this->countryResolver = new CountryResolver($this->orderFormValuesExtractor->getCountryId());
     }
 
     /**
@@ -32,17 +44,75 @@ class Homepage extends TemplateEngine
     public function getCountryList() : array
     {
         return [
-            '0' => 'Spain',
-            '1' => 'Italy'
+            1 => 'Spain',
+            2 => 'Italy'
         ];
     }
 
     /**
      * Returns order information
-     * @return string
+     * @return Order
      */
-    public function getOrderInformation() : string
+    public function getOrderInformation(): ?Order
     {
-        return '';
+        $country = $this->resolveCountry();
+        if ($country instanceof CountryInterface) {
+            $coffeeSettings = new CoffeeSettings();
+            $coffeeSettings->setNeedAddOn($this->orderFormValuesExtractor->hasAddOn())
+                ->setNeedSyrup($this->orderFormValuesExtractor->hasSyrup());
+
+            $coffee = new Coffee($country, $coffeeSettings);
+
+            return $coffee->make();
+        }
+
+        return null;
+    }
+
+    /**
+     * Resolve country
+     * @return CountryInterface|null
+     */
+    private function resolveCountry(): ?CountryInterface
+    {
+        if ($this->orderFormValuesExtractor->getCountryId() !== 0) {
+            try {
+                return $this->countryResolver->resolve();
+            } catch (\Exception $exception) {
+                $this->addError($exception->getMessage());
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Add error to stack
+     * @param string $errorMessage
+     * @return $this
+     */
+    private function addError(string $errorMessage) : self
+    {
+        $this->errors[] = $errorMessage;
+
+        return $this;
+    }
+
+    /**
+     * Errors
+     * @return array
+     */
+    public function getErrors() : array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Has errors
+     * @return bool
+     */
+    public function hasErrors() : bool
+    {
+        return count($this->errors) > 0;
     }
 }

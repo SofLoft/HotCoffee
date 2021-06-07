@@ -20,4 +20,10 @@ interface AddonInterface
      * @return float
      */
     public function getPrice() : float;
+
+    /**
+     * Qty
+     * @return int
+     */
+    public function getQty() : int;
 }

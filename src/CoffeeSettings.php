@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hotcoffee;
 
 /**
@@ -10,10 +9,10 @@ namespace Hotcoffee;
 class CoffeeSettings
 {
     /** @var bool */
-    private $isNeedSyrup = false;
+    private $needSyrup = false;
 
     /** @var bool */
-    private $isNeedAddOn = false;
+    private $needAddOn = false;
 
     /**
      * Need a Syrup
@@ -22,9 +21,27 @@ class CoffeeSettings
      */
     public function setNeedSyrup(bool $yesNo) : self
     {
-        $this->isNeedSyrup = $yesNo;
+        $this->needSyrup = $yesNo;
 
         return $this;
+    }
+
+    /**
+     * Has Add-ons
+     * @return bool
+     */
+    public function hasAddOn() : bool
+    {
+        return $this->needAddOn;
+    }
+
+    /**
+     * Has syrup
+     * @return bool
+     */
+    public function hasSyrup() : bool
+    {
+        return $this->needSyrup;
     }
 
     /**
@@ -34,7 +51,7 @@ class CoffeeSettings
      */
     public function setNeedAddOn(bool $yesNo) : self
     {
-        $this->isNeedAddOn = $yesNo;
+        $this->needAddOn = $yesNo;
 
         return $this;
     }

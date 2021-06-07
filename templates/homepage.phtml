@@ -17,8 +17,8 @@ $orderInformation = $this->getOrderInformation();
         <label for="lstCountry">Please select country</label>
         <select id="lstCountry" name="country">
             <?php foreach ($this->getCountryList() as $countryId => $countryName): ?>
-                <option value="<?= $countryId ?>">
-                    <?= $countryName; ?>
+                <option value="<?= $countryId ?>" <?php if ($countryId === 0): ?> selected<?php endif; ?>>
+                    <?= $countryName ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -38,12 +38,81 @@ $orderInformation = $this->getOrderInformation();
         </button>
     </form>
 
-    <?php if ($orderInformation !== ''): ?>
+    <?php if ($orderInformation !== null): ?>
     <br/>
-    <h3>Order information</h3>
-    <p>
-        <?= $orderInformation ?>
-    </p>
+    <h3>Order information. <?= $orderInformation->getCountryName() ?></h3>
+    <table>
+        <thead>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Qty
+            </td>
+            <td>
+                Price
+            </td>
+            <td>
+                Tax %
+            </td>
+            <td>
+                Tax amount
+            </td>
+            <td>
+                Total
+                (incl. Tax)
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($orderInformation->getItems() as $item): ?>
+            <tr>
+                <td>
+                    <?= $item->getName() ?>
+                </td>
+                <td>
+                    <?= $item->getOrderedQty() ?>
+                </td>
+                <td>
+                    <?= $item->getPrice() ?>
+                </td>
+                <td>
+                    <?= $item->getTaxPercent() ?>%
+                </td>
+                <td>
+                    <?= $item->getTaxAmount() ?>
+                </td>
+                <td>
+                    <?= $item->getRowTotal() + $item->getTaxAmount() ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+        <br/>
+        <ul>
+            <li>
+                Subtotal: <?= $orderInformation->getSubtotal() ?>
+            </li>
+            <li>
+                Tax: <?= $orderInformation->getTax() ?>
+            </li>
+            <li>
+                Grand Total: <?= $orderInformation->getGrandTotal() ?>
+            </li>
+        </ul>
+    <?php endif; ?>
+
+    <?php if ($this->hasErrors() === true): ?>
+    <h3>Errors:</h3>
+    <ul>
+        <?php foreach ($this->getErrors() as $error): ?>
+        <li>
+            <?= $error ?>
+        </li>
+        <?php endforeach; ?>
+    </ul>
     <?php endif; ?>
 </body>
 </html>

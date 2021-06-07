@@ -3,8 +3,6 @@
 
 namespace Hotcoffee\Addon;
 
-use Hotcoffee\Addon\AddonInterface;
-
 /**
  * Class FabricAddon
  * @package Hotcoffee\Addon
@@ -16,13 +14,15 @@ class FabricAddon
      * @param string $className
      * @param string $name
      * @param float $price
+     * @param int $qty
      * @return AddonInterface
      */
     public function create(
         string $className,
         string $name,
-        float $price
-    ) : IngredientInterface {
-       return new $className($name, $price);
+        float $price,
+        int $qty
+    ) : AddonInterface {
+       return new $className($name, $price, $qty);
     }
 }

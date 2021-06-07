@@ -10,12 +10,12 @@ namespace Hotcoffee\App;
 class Request
 {
     /**
-     * Returns value from request
+     * Get post value
      * @param string $param
      * @return mixed|null
      */
-    public function getValue(string $param)
+    public function getPost(string $param)
     {
-        return $_REQUEST[$param] ?? null;
+        return $_POST[$param] ?? null;
     }
 }

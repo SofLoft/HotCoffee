@@ -1,10 +1,12 @@
 <?php
 
-
 namespace Hotcoffee\Country;
 
-use Hotcoffee\Ingredients\CoconutSyrupIngredient;
 use Hotcoffee\Addon\CroissantAddon;
+use Hotcoffee\Ingredients\CoconutSyrupIngredient;
+use Hotcoffee\Ingredients\CoffeeIngredient;
+use Hotcoffee\Ingredients\MilkIngredient;
+use Hotcoffee\Ingredients\WaterIngredient;
 
 /**
  * Class Italy
@@ -13,64 +15,56 @@ use Hotcoffee\Addon\CroissantAddon;
 class Italy extends Base
 {
     /**
-     * Returns a portion
-     * @return int
+     * Returns country name
+     * @return string
      */
-    public function getPortion(): int
+    public function getCountryName(): string
     {
-        return 1;
+        return 'Italy';
     }
 
     /**
-     * Make coffee
+     * Taxes
+     * @return float
+     */
+    public function getTax(): float
+    {
+        return 7.00;
+    }
+
+    /**
+     * Add syrup to coffee
      * @return CountryInterface
      */
-    public function makeCoffee(): CountryInterface
+    public function addSyrup(): CountryInterface
     {
-        // TODO: Implement makeCoffee() method.
+        $this->addIngredient('Coconut Syrup', CoconutSyrupIngredient::class, 0.50, 1);
+
+        return $this;
     }
 
     /**
-     * Return Syrup by default
-     * @return string
+     * Add add-ons
+     * @return CountryInterface
      */
-    public function getSyrup(): string
+    public function addAddons(): CountryInterface
     {
-        return $this->getFabricIngredient()->create(
-            CoconutSyrupIngredient::class,
-            'Coco',
-            0.50
-        )->getName();
+        $this->addAddOn('Croissant', CroissantAddon::class, 1.00, 1);
+
+        return $this;
     }
 
     /**
-     * Return add-on by default
-     * @return string
+     * Prepare components
+     * @return CountryInterface
      */
-    public function getAddOn(): string
+    public function prepareComponents(): CountryInterface
     {
-        return $this->getFabricAddon()->create(
-            CroissantAddon::class,
-            'Croissant',
-            1.00
-        )->getName();
-    }
+        $this->addIngredient('Coffee', CoffeeIngredient::class, 1.50, 1)
+            ->addIngredient('Milk', MilkIngredient::class, 0.40, 1)
+            ->addIngredient('Water', WaterIngredient::class, 0.10, 1)
+        ;
 
-    /**
-     * Return add-ons
-     * @return \Hotcoffee\Addon\AddonInterface[]
-     */
-    public function getAddOns(): array
-    {
-        // TODO: Implement getAddOns() method.
-    }
-
-    /**
-     * Return Ingredients
-     * @return \Hotcofee\IngredientInterface[]
-     */
-    public function getIngredients(): array
-    {
-        // TODO: Implement getIngredients() method.
+        return $this;
     }
 }

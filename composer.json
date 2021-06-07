@@ -2,14 +2,14 @@
   "name": "hotcoffee/shop",
   "description": "HotCoffee",
   "license": "MIT",
-  "homepage": "https://hotcoffee.com",
+  "homepage": "https://github.com/SofLoft/HotCoffee",
   "support": {
-    "source": "https://git.sysint.net/softloft/mpl"
+    "source": "https://github.com/SofLoft/HotCoffee"
   },
   "authors": [
     {
       "name": "Soft-Loft Team",
-      "email": "vls.sergey@soft-loft.eu"
+      "email": "office@soft-loft.eu"
     }
   ],
   "autoload": {
