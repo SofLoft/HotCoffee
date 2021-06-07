@@ -43,7 +43,10 @@ Use default PHP, without any frameworks.
 
 
 ## What could be improved/added
+- To revise the technical approach in general
 - It is necessary to save the user's selection on the frontend
-- Need to add the currency class for formatting values
-- Need to add the container messages (output messages on frontend): error, notice, warning and so on
-- Need to move logic from the country class to coffee machine
+- Here is need to add a currency class to format values
+- Here is need to add container for messages (output messages on the web interface): error, notification, warning, etc.
+- It is necessary to transfer the logic from the country class to the coffee maker
+- The template engine needs to be improved
+- Should we add the controller - MVC pattern?

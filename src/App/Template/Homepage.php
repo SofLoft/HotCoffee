@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hotcoffee\App\Template;
 
 use Hotcoffee\Country\CountryInterface;

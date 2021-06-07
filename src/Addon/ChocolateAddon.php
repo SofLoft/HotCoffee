@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hotcoffee\Addon;
 
 /**

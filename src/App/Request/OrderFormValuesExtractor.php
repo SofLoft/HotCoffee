@@ -2,7 +2,6 @@
 
 namespace Hotcoffee\App\Request;
 
-
 use Hotcoffee\App\Request;
 
 /**
